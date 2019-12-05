@@ -1,0 +1,2 @@
+rails new --skip-git --skip-keeps --skip-action-mailer --skip-action-mailer --skip-puma --skip-coffee --skip-turbolinks --skip-bootsnap --skip-bundle --skip-yarn --skip-sprockets --skip-listen  .
+
