@@ -9,7 +9,13 @@ class SessionsController < ApplicationController
     sign_in user
     # TODO: redirect user to somewhere
    else
-    # TODO: unsuccessful sign in attempt
+    flash[:errors] = []
+    flash[:errors] << "E-mail must not be empty." if params[:email].empty?
+    flash[:errors] << "Password must not be empty." if params[:password].empty?
+    if user.nil? || !user.authenticate(params[:password])
+      flash[:errors] << "Couldn't sign in with given e-mail and password!"
+    end
+
     redirect_to(sign_in_path) and return
    end
   end
