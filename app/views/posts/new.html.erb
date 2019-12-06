@@ -1,0 +1,7 @@
+<h2>New Post</h2>
+<%= form_with model: @post do |form| %>
+
+Author: <%= controller.current_user.name %><br/>
+<%= text_area :post, :content %><br/>
+<%= submit_tag("Publish") %>
+<% end %>
