@@ -1,0 +1,8 @@
+<h2>Sign Up</h2>
+<%= form_with model: @user do |form| %>
+<%= label_tag(:name, "Name: ") %> <%= form.text_field :name %>
+<%= label_tag(:email, "Email: ") %> <%= form.text_field :email %>
+<%= label_tag(:password, "Password: ") %> <%= form.password_field :password %>
+<%= label_tag(:password_confirmation, "Password Again: ") %> <%= form.password_field :password_confirmation %>
+<%= submit_tag("Sign Up") %>
+<% end %>
