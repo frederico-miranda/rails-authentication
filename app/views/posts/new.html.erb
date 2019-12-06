@@ -1,4 +1,11 @@
 <h2>New Post</h2>
+<% if flash[:errors] %>
+<div class="errors">
+<% flash[:errors].each do |error| %>
+  <div class="error"><%= error %></div>
+<% end %>
+</div>
+<% end %>
 <%= form_with model: @post do |form| %>
 
 Author: <%= controller.current_user.name %><br/>

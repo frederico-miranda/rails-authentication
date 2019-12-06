@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   def new
    user = self.current_user
    unless user
-     flash[:error] = "You need to be signed in to publish a new post."
+     flash[:errors] = []
+     flash[:errors] << "You need to be signed in to publish a new post."
      redirect_to(sign_in_path) and return
    end
   end
@@ -14,10 +15,13 @@ class PostsController < ApplicationController
     user = self.current_user
     post = Post.new(user: user, content: params[:post][:content])
     if post.save
-      redirect_to posts_path
-      return
+      redirect_to(posts_path) and return
     else
-      # TODO: needs log in to create post.
+      flash[:errors] = []
+      post.errors.full_messages.each do |error|
+        flash[:errors] << error
+      end
+      redirect_to(new_post_path) and return
     end
   end
 end
