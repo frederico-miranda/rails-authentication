@@ -7,10 +7,10 @@ class SessionsController < ApplicationController
    password = params[:password]
    if user && user.authenticate(password)
     sign_in user
-    redirect_to root_path
+    # TODO: redirect user to somewhere
    else
     # TODO: unsuccessful sign in attempt
-    redirect_to sign_in_path
+    redirect_to(sign_in_path) and return
    end
   end
 
