@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsAuthentication</title>
+    <title><%= @page_title %> — Members Only!</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,24 @@
   </head>
 
   <body>
+    <div class="fixed-header-banner">
+      <% if controller.current_user %>
+      <div class="welcome-greeting">
+        Hello, <%= controller.current_user.name %>
+      </div>
+      <% end %>
+      <nav>
+       <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <% if controller.current_user %>
+        <li><%= link_to "Sign Out", sign_out_path, method: :delete %></li>
+        <% else %>
+        <li><%= link_to "Sign In", sign_in_path %></li>
+        <li><%= link_to "Sign Up", new_user_path %></li>
+        <% end %>
+       </ul>
+      </nav>
+    </div>
     <%= yield %>
   </body>
 </html>
