@@ -3,12 +3,16 @@ class UsersController < ApplicationController
   end
 
   def create
-   user = User.create(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
-   if user
+   user = User.new(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+   if user.save
      self.current_user = user
      redirect_to root_path
-   else
-     # TODO: error when creating user.
+   else    
+    flash[:errors] = []    
+    user.errors.full_messages.each do |error|
+      flash[:errors] << error
+    end
+    redirect_to(new_user_path) and return
    end
   end
 end
