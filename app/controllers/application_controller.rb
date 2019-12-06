@@ -1,9 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  def new_remember_token
-    Digest::SHA1.hexdigest SecureRandom.urlsafe_base64.to_s
-  end
-
   def current_user
     remember_token = cookies.permanent[:remember_token]
     if remember_token
@@ -18,9 +14,10 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_in(user)
-    user.remember_token = new_remember_token
+    user.remember_token = User.new_remember_token
     if user.save
       self.current_user = user
+      redirect_to root_path
     else
       # TODO: 500 - internal server error
     end
