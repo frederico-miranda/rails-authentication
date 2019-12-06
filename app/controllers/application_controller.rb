@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
     if remember_token
       @user ||= User.find_by(remember_token: remember_token)
     end
+    @user
   end
 
   def current_user=(user)
@@ -18,6 +19,7 @@ class ApplicationController < ActionController::Base
     if user.save
       self.current_user = user
       redirect_to root_path
+      return
     else
       # TODO: 500 - internal server error
     end
