@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= @page_title %> — Members Only!</title>
+    <title>Members Only!</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,9 +11,10 @@
 
   <body>
     <div class="fixed-header-banner">
+      <h1><%= link_to "Members Only!", root_path %></h1>
       <% if controller.current_user %>
       <div class="welcome-greeting">
-        Hello, <%= controller.current_user.name %>
+        Hello, <span class="username"><%= controller.current_user.name %></span>
       </div>
       <% end %>
       <nav>
@@ -30,6 +31,8 @@
        </ul>
       </nav>
     </div>
+    <div class="body-content">
     <%= yield %>
+    </div>
   </body>
 </html>

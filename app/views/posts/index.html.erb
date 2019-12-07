@@ -2,14 +2,13 @@
 
 <table>
  <tr>
-   
    <th>Author</th>
    <th>Content</th>
  </tr>
  <% Post.all.each do |post| %>
  <tr>
-   <td><%= if controller.current_user then post.user.name else "[FILTERED]" end %></td>
-   <td><%= post.content %></td>
+   <td><span class="username"><%= if controller.current_user then post.user.name else "[FILTERED]" end %></span></td>
+   <td><span class="post-entry"><%= post.content %></span></td>
  </tr>
  <% end %>
 </table>
