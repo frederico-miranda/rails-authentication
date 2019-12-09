@@ -1,10 +1,9 @@
-class ApplicationController < ActionController::Base
+# frozen_string_literal: true
 
+class ApplicationController < ActionController::Base
   def current_user
     remember_token = cookies.permanent[:remember_token]
-    if remember_token
-      @user ||= User.find_by(remember_token: remember_token)
-    end
+    @user ||= User.find_by(remember_token: remember_token) if remember_token
     @user
   end
 
@@ -16,13 +15,10 @@ class ApplicationController < ActionController::Base
 
   def sign_in(user)
     user.remember_token = User.new_remember_token
-    if user.save
-      self.current_user = user
-      redirect_to root_path
-      return
-    else
-      # TODO: 500 - internal server error
-    end
+    return unless user.save
+
+    self.current_user = user
+    redirect_to(root_path) && return
   end
 
   def sign_out

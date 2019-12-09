@@ -1,4 +1,6 @@
-EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+# frozen_string_literal: true
+
+EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
 class User < ApplicationRecord
   has_secure_password
@@ -10,6 +12,6 @@ class User < ApplicationRecord
   end
 
   before_create do
-   self.remember_token = User.new_remember_token
+    self.remember_token = User.new_remember_token
   end
 end
