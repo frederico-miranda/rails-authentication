@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  before_action :user_signed_in?, only: [:new, :create]
-  
+  before_action :user_signed_in?, only: %i[new create]
+
   def user_signed_in?
     return if current_user
 
@@ -13,8 +13,7 @@ class PostsController < ApplicationController
 
   def index; end
 
-  def new
-  end
+  def new; end
 
   def create
     user = current_user
