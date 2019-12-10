@@ -1,0 +1,14 @@
+<h2>All Posts</h2>
+
+<table>
+ <tr>
+   <th>Author</th>
+   <th>Content</th>
+ </tr>
+ <% Post.all.each do |post| %>
+ <tr>
+   <td><span class="username"><%= if controller.current_user then post.user.name else "[FILTERED]" end %></span></td>
+   <td><span class="post-entry"><%= post.content %></span></td>
+ </tr>
+ <% end %>
+</table>

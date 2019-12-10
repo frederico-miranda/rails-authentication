@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Members Only!</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <div class="fixed-header-banner">
+      <h1><%= link_to "Members Only!", root_path %></h1>
+      <% if controller.current_user %>
+      <div class="welcome-greeting">
+        Hello, <span class="username"><%= controller.current_user.name %></span>
+      </div>
+      <% end %>
+      <nav>
+       <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Posts", posts_path %></li>
+        <% if controller.current_user %>
+        <li><%= link_to "New Post", new_post_path %></li>
+        <li><%= link_to "Sign Out", sign_out_path, method: :delete %></li>
+        <% else %>
+        <li><%= link_to "Sign In", sign_in_path %></li>
+        <li><%= link_to "Sign Up", new_user_path %></li>
+        <% end %>
+       </ul>
+      </nav>
+    </div>
+    <div class="body-content">
+    <%= yield %>
+    </div>
+  </body>
+</html>

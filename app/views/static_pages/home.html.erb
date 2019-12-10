@@ -1,0 +1,7 @@
+<h2>Home Page</h2>
+<% if controller.current_user then %>
+<p>Hello, <span class="username"><%= controller.current_user.name %></span>. Would you like to <%= link_to "create a new post", new_post_path() %>? Or maybe you'd like to see the  contents of the <%= link_to "publications", posts_path() %> here? Whatever you'd like to do, I hope you enjoy your stay here!</p>
+<% else %>
+<p>Hello, anonymous visitor! This is a members-only web page. You are allowed to see the contents of the <%= link_to "publications", posts_path() %> here, but you won't be able to
+see the authors. You'll either need to <%= link_to "sign in",  sign_in_path() %> or <%= link_to "sign up", new_user_path()  %> to publish posts here and see the authors of posts here.</p>
+<% end %>
