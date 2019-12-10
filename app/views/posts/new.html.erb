@@ -6,7 +6,7 @@
 <% end %>
 </div>
 <% end %>
-<%= form_with model: @post do |form| %>
+<%= form_with url: posts_path, model: @post do |form| %>
 
 Author: <%= controller.current_user.name %><br/>
 <%= text_area :post, :content %><br/>
