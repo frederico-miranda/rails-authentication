@@ -1,15 +1,19 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  def index; end
-
-  def new
-    user = current_user
-    return unless user
+  before_action :user_signed_in?, only: [:new, :create]
+  
+  def user_signed_in?
+    return if current_user
 
     flash[:errors] = []
     flash[:errors] << 'You need to be signed in to publish a new post.'
     redirect_to(sign_in_path) && return
+  end
+
+  def index; end
+
+  def new
   end
 
   def create
