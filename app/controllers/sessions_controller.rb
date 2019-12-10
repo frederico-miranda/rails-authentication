@@ -3,7 +3,7 @@
 class SessionsController < ApplicationController
   def new; end
 
-  # rubocop:disable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def create
     user = User.find_by email: params[:email]
     password = params[:password]
@@ -16,16 +16,14 @@ class SessionsController < ApplicationController
     flash[:errors] = []
     flash[:errors] << 'E-mail must not be empty.' if params[:email].empty?
     flash[:errors] << 'Password must not be empty.' if params[:password].empty?
-    unless authenticates
-      flash[:errors] << "Couldn't sign in with given e-mail and password!" unless user.nil?
-    end
+    flash[:errors] << "Couldn't sign in with given e-mail and password!" unless authenticates && !user.nil?
 
     redirect_to(sign_in_path) && return
   end
-  # rubocop:enable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def delete
     sign_out
-    redirect_to root_path
+    redirect_to(root_path) && return
   end
 end
